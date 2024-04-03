@@ -22,7 +22,7 @@ import { MdDescription } from "react-icons/md";
 import { MdTitle } from "react-icons/md";
 import { createTask } from "../../../services/TaskService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
-import { UseAppContext } from "./context";
+import { UseAppContext } from "./Context";
 
 export default function AddTaskModal() {
   const { user } = UseAppContext();

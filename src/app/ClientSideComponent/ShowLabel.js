@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { UseAppContext } from "./context";
+import { UseAppContext } from "./Context";
 
 export default function ShowLabel() {
   const { user } = UseAppContext();

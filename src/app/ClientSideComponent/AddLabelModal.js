@@ -27,7 +27,7 @@ import { ImCross } from "react-icons/im";
 import { addNewLabel } from "../../../services/UserService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { useRouter } from "next/navigation";
-import { UseAppContext } from "./context";
+import { UseAppContext } from "./Context";
 
 export function AddLabelModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();

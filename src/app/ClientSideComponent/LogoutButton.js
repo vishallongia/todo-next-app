@@ -4,7 +4,7 @@ import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { FaPowerOff } from "react-icons/fa6";
 import { logoutUser } from "../../../services/UserService";
 import { useRouter } from "next/navigation";
-import { UseAppContext } from "./context";
+import { UseAppContext } from "./Context";
 import AddTaskModal from "./AddTaskModal";
 
 export default function logoutButton() {
