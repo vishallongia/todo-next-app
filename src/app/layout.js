@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { AppWrapper } from "./ClientSideComponent/context";
+import { AppWrapper } from "./ClientSideComponent/Context";
 import { ChakraUIProvider } from "./ClientSideComponent/ChakraUIProvider";
 import "./globals.css";
 export const metadata = {
