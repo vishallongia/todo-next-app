@@ -12,7 +12,7 @@ import { FallingLines } from "react-loader-spinner";
 import { SiNamecheap } from "react-icons/si";
 import { registerUser } from "../../../services/UserService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
-import { UseAppContext } from "../ClientSideComponent/context";
+import { UseAppContext } from "../ClientSideComponent/Context";
 
 export default function page() {
   const { setIsAuthenticated } = UseAppContext();

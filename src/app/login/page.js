@@ -6,7 +6,7 @@ import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
-import { UseAppContext } from "../ClientSideComponent/context";
+import { UseAppContext } from "../ClientSideComponent/Context";
 import { loginUser } from "../../../services/UserService";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
