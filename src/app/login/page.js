@@ -145,7 +145,7 @@ export default function Page() {
             )}
           </button>
           <p className="mx-[20px]">
-            Don't have an account ?{" "}
+            Don&apos;t have an account ?{" "}
             <Link href="/register" className="text-[#48aae6]">
               Create Account
             </Link>

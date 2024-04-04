@@ -41,7 +41,7 @@ export const AppWrapper = ({ children }) => {
     };
 
     fetchMyProfile();
-  }, []);
+  }, [pathname,router]);
 
   return (
     <>

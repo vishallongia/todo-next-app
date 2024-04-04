@@ -14,7 +14,7 @@ import { registerUser } from "../../../services/UserService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { UseAppContext } from "../ClientSideComponent/Context";
 
-export default function page() {
+export default function Page() {
   const { setIsAuthenticated } = UseAppContext();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +70,7 @@ export default function page() {
       <div className=" flex items-center justify-center bg-gradient-to-r from-[#0b4f79] to-[#94caeb] h-screen ">
         <div className="w-[90%] text-center rounded-lg  pb-[50px] pt-[50px] bg-[snow]">
           <h1 className="text-[35px] font-bungee font-semibold">Sign Up</h1>
-          <p>It's quick and easy</p>
+          <p>It&apos;s quick and easy</p>
           <div className="flex justify-center mb-[25px] mt-[10px]">
             {" "}
             <FaRegUser size={120} className="" />

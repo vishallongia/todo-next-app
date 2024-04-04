@@ -4,6 +4,14 @@ import * as jose from "jose";
 import { headers } from "next/headers";
 import ErrorHandler from "./ErrorHandler";
 
+export const config = {
+  runtime: "edge", // for Edge API Routes only
+  unstable_allowDynamic: [
+    "/node_modules/mongoose/dist/browser.umd.js",
+    "/utillis/Feature.js",
+  ],
+};
+
 //Connection with DB
 export const connectDB = async () => {
   try {

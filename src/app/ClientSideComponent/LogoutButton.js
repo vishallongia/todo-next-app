@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { UseAppContext } from "./Context";
 import AddTaskModal from "./AddTaskModal";
 
-export default function logoutButton() {
+export default function LogoutButton() {
   const { isAuthenticated } = UseAppContext();
 
   const router = useRouter();

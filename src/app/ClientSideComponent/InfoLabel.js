@@ -45,7 +45,7 @@ export default function InfoLabel() {
                   color="#0b4f79"
                   className="relative mb-[5px]"
                 />{" "}
-                Tap the "+" button.
+                Tap the &quot;+&quot; button.
               </ListItem>{" "}
               <ListItem>
                 <ListIcon

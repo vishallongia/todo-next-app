@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { tokenVerifier } from "../utillis/Feature";
 import ErrorHandler from "../utillis/ErrorHandler";
-import { headers } from "next/headers";
 
 // Limit the middleware to paths starting with `/api/`
 export const config = {
+  runtime: "experimental-edge", // for Edge API Routes only
+  unstable_allowDynamic: [
+    "/node_modules/mongoose/dist/browser.umd.js",
+    "/utillis/Feature.js",
+  ],
   matcher: [
     "/api/newtask",
     "/api/myprofile",
