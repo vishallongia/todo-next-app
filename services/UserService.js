@@ -65,7 +65,7 @@ export const logoutUser = async (payload) => {
 export const myProfile = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/myprofile", {
+    const response = await fetch(process.env.HOST_DOMAIN+"/api/myprofile", {
       method: "GET",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
