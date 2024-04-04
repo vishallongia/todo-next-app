@@ -29,7 +29,7 @@ export const AppWrapper = ({ children }) => {
         setUser(response.user);
         setIsLoading(false);
       } else {
-        if (pathname === "/") {
+        if (pathname === "/" || pathname === "/register" ) {
           setIsLoading(false);
         } else {
           router.push("/login");
