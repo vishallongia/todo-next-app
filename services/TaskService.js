@@ -2,7 +2,7 @@
 export const createTask = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/newtask", {
+    const response = await fetch("/api/newtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
@@ -23,7 +23,7 @@ export const createTask = async (payload) => {
 export const myTask = async (token, pageno) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/mytask?pageno=${pageno}`,
+      `/api/mytask?pageno=${pageno}`,
       {
         method: "GET",
         headers: {
@@ -46,7 +46,7 @@ export const myTask = async (token, pageno) => {
 export const deleteTask = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/deletetask", {
+    const response = await fetch("/api/deletetask", {
       method: "POST",
       headers: {
         // cookie: `token=${token}`,
@@ -68,7 +68,7 @@ export const deleteTask = async (payload) => {
 export const updateTask = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/updatetask", {
+    const response = await fetch("/api/updatetask", {
       method: "POST",
       headers: {
         // cookie: `token=${token}`,

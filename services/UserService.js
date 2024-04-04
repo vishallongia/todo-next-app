@@ -1,7 +1,7 @@
 export const loginUser = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
@@ -23,7 +23,7 @@ export const loginUser = async (payload) => {
 export const registerUser = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
@@ -44,7 +44,7 @@ export const registerUser = async (payload) => {
 export const logoutUser = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/logout", {
+    const response = await fetch("/api/logout", {
       method: "GET",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
@@ -87,7 +87,7 @@ export const myProfile = async (payload) => {
 export const addNewLabel = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
   try {
-    const response = await fetch("http://localhost:3000/api/addlabel", {
+    const response = await fetch("/api/addlabel", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set correct content type for JSON data
