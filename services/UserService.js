@@ -64,7 +64,6 @@ export const logoutUser = async (payload) => {
 
 export const myProfile = async (payload) => {
   const jsonPayload = JSON.stringify(payload);
-  console.log(process.env.HOST_DOMAIN);
   try {
     const response = await fetch("/api/myprofile", {
       method: "GET",

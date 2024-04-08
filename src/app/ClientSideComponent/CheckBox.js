@@ -1,35 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "../globals.css";
-import { useRouter } from "next/navigation";
-import { updateTask } from "../../../services/TaskService";
-import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
-
+import IsTaskCheckedModal from "../ClientSideComponent/IsTaskCheckedModal";
 
 export default function CheckBox({ id }) {
-  const router = useRouter();
+  const [showIsTaskCheckedPopup, setShowIsTaskCheckedPopup] = useState(false);
   const handleUpdateTask = async (isChecked) => {
-    if (isChecked) {
-      const response = await updateTask({ taskId: id });
-      const { redirection, success } = UIErrorHandler(response);
-      if (redirection && !success) {
-        router.push(redirection);
-      }
-      if (success) {
-        router.refresh();
-      }
-    }
+    setShowIsTaskCheckedPopup(isChecked);
   };
 
   return (
-    <div className="checkbox-wrapper-19 relative top-[3px]">
-      <input
-        id={id}
-        type="checkbox"
-        onChange={(e) => {
-          handleUpdateTask(e.target.checked);
-        }}
-      />
-      <label className="check-box" htmlFor={id}></label>
-    </div>
+    <>
+      <div className="checkbox-wrapper-19 relative top-[3px]">
+        <input
+          id={id}
+          type="checkbox"
+          checked={showIsTaskCheckedPopup} // Set checked attribute based on showIsTaskCheckedPopup
+          onChange={(e) => {
+            handleUpdateTask(e.target.checked);
+          }}
+        />
+        <label className="check-box" htmlFor={id}></label>
+      </div>
+      {showIsTaskCheckedPopup && (
+        <IsTaskCheckedModal
+          showIsTaskCheckedPopup={showIsTaskCheckedPopup}
+          setShowIsTaskCheckedPopup={setShowIsTaskCheckedPopup}
+          id={id}
+        />
+      )}
+    </>
   );
 }

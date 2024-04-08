@@ -10,21 +10,24 @@ import mongoose from "mongoose";
 export const POST = catchAsyncErrors(async function (NextRequest) {
   let userId = getUserIdFromHeaders();
   const { taskId } = await NextRequest.json();
+
   if (!userId) {
     return ErrorHandler(401, "Please login first");
   }
-  // if (
-  //   !Array.isArray(deleteTaskId) ||
-  //   deleteTaskId.some((id) => !mongoose.isValidObjectId(id))
-  // ) {
-  //   return ErrorHandler(400, "Invalid deleteTaskId format");
-  // }
+
+  if (!taskId) {
+    return ErrorHandler(400, "Please provide task id");
+  }
   await connectDB();
   const updatedTask = await Task.findOneAndUpdate(
     { _id: taskId }, // Query: find task by its ID
     { isCompleted: true }, // Update: set isCompleted field to true
     { new: true } // Options: return the updated document
   );
+
+  if (!updatedTask) {
+    return ErrorHandler(400, "Task id not found");
+  }
 
   return NextResponse.json({
     success: true,
