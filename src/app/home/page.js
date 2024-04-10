@@ -14,7 +14,6 @@ export default async function page({ searchParams }) {
   const currentPage = searchParams.page || 1;
   const currentTab = searchParams.idx;
   const data = await getMyTask(currentPage, currentTab);
-  console.log(data)
   return (
     <div className="bg-[mintcream] relative min-h-screen">
       <div className="bg-[#48aae6] h-[5px] fixed top-0 left-0 right-0"></div>

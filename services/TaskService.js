@@ -23,7 +23,7 @@ export const createTask = async (payload) => {
 export const myTask = async (token, pageno, currentTab) => {
   try {
     const response = await fetch(
-      `https://todo-next-app-swart.vercel.app/api/mytask?pageno=${pageno}&idx=${currentTab}`,
+      `http://localhost:3000/api/mytask?pageno=${pageno}&idx=${currentTab}`,
       {
         method: "GET",
         headers: {
