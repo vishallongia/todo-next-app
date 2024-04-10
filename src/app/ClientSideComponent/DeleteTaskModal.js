@@ -50,7 +50,7 @@ export default function DeleteTaskModal({
         <AlertDialogOverlay>
           <AlertDialogContent className="w-[90%]">
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              Delete Task
             </AlertDialogHeader>
 
             <AlertDialogBody>

@@ -24,9 +24,5 @@ export default function LogoutButton() {
   //   router.push("/login");
   // }
 
-  return (
-    <button className="basis-[33.3%] flex justify-center">
-      <FaPowerOff size={25} className="text-[snow]" onClick={logoutFn} />
-    </button>
-  );
+  return <FaPowerOff size={30} className="text-[snow]" onClick={logoutFn} />;
 }

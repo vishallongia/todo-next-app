@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 function PageNavigator({ totalPages, backendCurrentPage }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState(backendCurrentPage || 1);
+  const currentTab = Number(searchParams.get("idx")) || 0;
   const numberOfPages = [];
   for (let i = 1; i <= totalPages; i++) {
     numberOfPages.push(i);
@@ -12,7 +15,11 @@ function PageNavigator({ totalPages, backendCurrentPage }) {
 
   const handleCurrentPage = (numberOfPage) => {
     setCurrentPage(numberOfPage);
-    router.push(`/home?page=${numberOfPage}`);
+    if (currentTab === 0) {
+      router.push(`/home?page=${numberOfPage}`);
+    } else {
+      router.push(`/home?page=${numberOfPage}&idx=${currentTab}`);
+    }
   };
 
   return (
@@ -26,7 +33,13 @@ function PageNavigator({ totalPages, backendCurrentPage }) {
               }
               disabled={backendCurrentPage === 1}
               onClick={() => {
-                router.push(`/home?page=${backendCurrentPage - 1}`);
+                if (currentTab === 0) {
+                  router.push(`/home?page=${backendCurrentPage - 1}`);
+                } else {
+                  router.push(
+                    `/home?page=${backendCurrentPage - 1}&idx=${currentTab}`
+                  );
+                }
               }}
             >
               <span className="sr-only">Previous</span>
@@ -74,7 +87,13 @@ function PageNavigator({ totalPages, backendCurrentPage }) {
             <button
               className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               onClick={() => {
-                router.push(`/home?page=${backendCurrentPage + 1}`);
+                if (currentTab === 0) {
+                  router.push(`/home?page=${backendCurrentPage + 1}`);
+                } else {
+                  router.push(
+                    `/home?page=${backendCurrentPage + 1}&idx=${currentTab}`
+                  );
+                }
               }}
               disabled={backendCurrentPage === totalPages}
             >

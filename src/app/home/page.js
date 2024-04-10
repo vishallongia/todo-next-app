@@ -5,14 +5,16 @@ import DateComp from "../ClientSideComponent/DateComp";
 import LogoutButton from "../ClientSideComponent/LogoutButton";
 import { myTask } from "../../../services/TaskService";
 import { cookies } from "next/headers";
-import { CgProfile } from "react-icons/cg";
 import { TabsDemo } from "../ClientSideComponent/TabsDemo";
 import ShowLabel from "../ClientSideComponent/ShowLabel";
 import AddLabelModal from "../ClientSideComponent/AddLabelModal";
+import ProfileDrawer from "../ClientSideComponent/ProfileDrawer";
 
 export default async function page({ searchParams }) {
   const currentPage = searchParams.page || 1;
-  const data = await getMyTask(currentPage);
+  const currentTab = searchParams.idx;
+  const data = await getMyTask(currentPage, currentTab);
+  console.log(data)
   return (
     <div className="bg-[mintcream] relative min-h-screen">
       <div className="bg-[#48aae6] h-[5px] fixed top-0 left-0 right-0"></div>
@@ -35,13 +37,9 @@ export default async function page({ searchParams }) {
         )}
       </div>
       <div className="bg-[#48aae6] fixed bottom-0 left-0 right-0">
-        <div className="flex py-[15px] items-center">
-          <button className="basis-[33.3%] flex justify-center">
-            <FaHome size={25} className="text-[snow]" />
-          </button>
-          <button className="basis-[33.3%] flex justify-center">
-            <CgProfile size={30} className="text-[snow]" />
-          </button>
+        <div className="flex py-[15px] items-center w-[100%] justify-around">
+          <ProfileDrawer />
+          <FaHome size={30} className="text-[snow]" />
           <LogoutButton />
         </div>
       </div>
@@ -50,10 +48,9 @@ export default async function page({ searchParams }) {
 }
 
 // Implement the getServerSideProps function
-export async function getMyTask(pageno) {
+export async function getMyTask(pageno, currentTab) {
   // Fetch data from an API or database
   const { value: token } = cookies().get("token") || {};
-  const response = await myTask(token, pageno);
-
+  const response = await myTask(token, pageno, currentTab);
   return response;
 }

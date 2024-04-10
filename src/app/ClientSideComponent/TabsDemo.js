@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Tabs } from "./Tabs";
 import CheckBox from "./CheckBox";
 import DeleteButton from "./DeleteButton";
@@ -8,9 +9,12 @@ import { BiTaskX } from "react-icons/bi";
 import { Badge } from "@chakra-ui/react";
 import { MdDone } from "react-icons/md";
 import PageNavigator from "./Pagination";
+import { useSearchParams } from "next/navigation";
 
 export function TabsDemo({ data, totalPages, backendCurrentPage }) {
   const [key, setKey] = useState(0);
+  const searchParams = useSearchParams();
+  const activeTabIndex = Number(searchParams.get("idx")) || 0;
 
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
@@ -68,27 +72,32 @@ export function TabsDemo({ data, totalPages, backendCurrentPage }) {
     {
       title: "Recent",
       value: "Recent",
-      content: (
-        <div className="w-full overflow-hidden relative h-auto rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#0b4f79] to-[#94caeb]">
-          <p>Services tab</p>
-        </div>
-      ),
+      // content: (
+      //   <div className="w-full overflow-hidden relative h-auto rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#0b4f79] to-[#94caeb]">
+      //     <p>Services tab</p>
+      //   </div>
+      // ),
     },
     {
       title: "Upcoming",
       value: "Upcoming",
-      content: (
-        <div className="w-full overflow-hidden relative h-auto rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#0b4f79] to-[#94caeb]">
-          <p>Playground tab</p>
-        </div>
-      ),
+      // content: (
+      //   <div className="w-full overflow-hidden relative h-auto rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#0b4f79] to-[#94caeb]">
+      //     <p>Playground tab</p>
+      //   </div>
+      // ),
     },
   ];
 
   return (
     <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto my-10 w-[90%]">
       {/* Pass the key to force re-render of Tabs component */}
-      <Tabs tabs={tabs} key={key} className="mb-[80px]" />
+      <Tabs
+        tabs={tabs}
+        key={key}
+        className="mb-[80px]"
+        activeTabIndex={activeTabIndex}
+      />
     </div>
   );
 }

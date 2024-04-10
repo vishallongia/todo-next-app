@@ -1,8 +1,8 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { cn } from "../utils/cn"
+import { cn } from "../utils/cn";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 type Tab = {
   title: string;
@@ -25,6 +25,16 @@ export const Tabs = ({
 }) => {
   const [active, setActive] = useState<Tab>(propTabs[0]);
   const [tabs, setTabs] = useState<Tab[]>(propTabs);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+
+    const idxParam = Number(searchParams.get("idx")) || 0;
+    if (!isNaN(idxParam) && idxParam >= 0 && idxParam < tabs.length) {
+      setActive(tabs[idxParam]);
+    }
+  }, [searchParams, tabs]);
 
   const moveSelectedTabToTop = (idx: number) => {
     const newTabs = [...propTabs];
@@ -32,6 +42,13 @@ export const Tabs = ({
     newTabs.unshift(selectedTab[0]);
     setTabs(newTabs);
     setActive(newTabs[0]);
+    if (idx !== 0) {
+      router.push(`?idx=${idx}`);
+    }
+    else {
+      router.push("/home");
+    }
+
   };
 
   const [hovering, setHovering] = useState(false);
@@ -110,8 +127,7 @@ export const FadeInDiv = ({
               scale: 1 - idx * 0.1,
               top: hovering ? idx * -50 : 0,
               zIndex: -idx,
-              // opacity: idx < 3 ? 1 - idx * 0.1 : 0,
-              opacity: isActive(tab) ? 1 : 0
+              opacity: isActive(tab) ? 1 : 0,
             }}
             animate={{
               y: isActive(tab) ? [0, 40, 0] : 0,
@@ -120,7 +136,7 @@ export const FadeInDiv = ({
           >
             {tab.content}
           </motion.div>
-        )
+        );
       })}
     </div>
   );
