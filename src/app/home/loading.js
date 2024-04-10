@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton, Stack, Box } from "@chakra-ui/react";
-export default function loading() {
+export default function Loading() {
   return (
     <>
       <Skeleton className="min-h-[250px] mt-[40px] mx-[15px] rounded-md"></Skeleton>
