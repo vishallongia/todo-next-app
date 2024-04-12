@@ -9,7 +9,8 @@ import { TabsDemo } from "../ClientSideComponent/TabsDemo";
 import ShowLabel from "../ClientSideComponent/ShowLabel";
 import AddLabelModal from "../ClientSideComponent/AddLabelModal";
 import ProfileDrawer from "../ClientSideComponent/ProfileDrawer";
-
+import TodayTaskSlider from "../ClientSideComponent/TodayTaskSlider";
+import TaskOptionDialer from "../ClientSideComponent/TaskOptionDialer";
 export default async function page({ searchParams }) {
   const currentPage = searchParams.page || 1;
   const currentTab = searchParams.idx;
@@ -17,15 +18,22 @@ export default async function page({ searchParams }) {
   return (
     <div className="bg-[mintcream] relative min-h-screen">
       <div className="bg-[#48aae6] h-[5px] fixed top-0 left-0 right-0"></div>
-      <AddTaskModal />
+
+      <h3 className="flex justify-center text-[60px] font-bold font-dhurjati mb-[30px]">
+        <span className="text-[#48aae6]">my</span>Todo
+      </h3>
+      <TaskOptionDialer className="sticky top-[12px]" />
+      {/* <AddTaskModal /> */}
       {/* <div className="flex justify-center">
         <DateComp></DateComp>
       </div> */}
-      <h3 className="flex justify-center text-[60px] font-bold font-dhurjati">
-        <span className="text-[#48aae6]">my</span>Todo
+
+      <h3 className="flex justify-center text-[45px] font-bold font-dhurjati mb-[15px]">
+        <span className="text-[#48aae6]">Today&apos;s</span>&nbsp;Tasks
       </h3>
-      <ShowLabel />
-      <AddLabelModal />
+      <TodayTaskSlider />
+      {/* <ShowLabel />
+      <AddLabelModal /> */}
       <div>
         {data && (
           <TabsDemo

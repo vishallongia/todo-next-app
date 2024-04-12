@@ -23,6 +23,8 @@ import { MdTitle } from "react-icons/md";
 import { createTask } from "../../../services/TaskService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { UseAppContext } from "./Context";
+import { MdOutlineAddTask } from "react-icons/md";
+import { Tooltip } from "primereact/tooltip";
 
 export default function AddTaskModal() {
   const { user } = UseAppContext();
@@ -95,20 +97,16 @@ export default function AddTaskModal() {
 
   return (
     <>
-      <div className="mt-[30px] flex justify-end mb-[15px] sticky top-[10px]">
-        <Button
+      <div className="">
+        <MdOutlineAddTask
+          size={40}
           onClick={() => {
             setOverlay(<OverlayTwo />);
             onOpen();
           }}
           color={"white"}
           background={"#48aae6"}
-          fontSize={26}
-          fontWeight="md"
-          className=" flex items-center px-[22px]  rounded-lg   w-[fit-content] mr-[5px] mt-[5px] font-dhurjati"
-        >
-          Add Task
-        </Button>
+        ></MdOutlineAddTask>
 
         <Modal
           initialFocusRef={initialRef}

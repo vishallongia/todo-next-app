@@ -29,7 +29,7 @@ export const AppWrapper = ({ children }) => {
         setUser(response.user);
         setIsLoading(false);
       } else {
-        if (pathname === "/" || pathname === "/register" ) {
+        if (pathname === "/" || pathname === "/register") {
           setIsLoading(false);
         } else {
           router.push("/login");
@@ -41,13 +41,11 @@ export const AppWrapper = ({ children }) => {
     };
 
     fetchMyProfile();
-  }, [pathname,router]);
+  }, [pathname, router]);
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {isLoading ? null : (
         <AppContext.Provider value={contextValue}>
           {children}
         </AppContext.Provider>

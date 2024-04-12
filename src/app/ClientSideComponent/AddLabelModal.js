@@ -15,9 +15,6 @@ import {
   useDisclosure,
   InputRightElement,
   InputGroup,
-  ListItem,
-  List,
-  ListIcon,
 } from "@chakra-ui/react";
 import InfoLabel from "../ClientSideComponent/InfoLabel";
 
@@ -28,6 +25,7 @@ import { addNewLabel } from "../../../services/UserService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { useRouter } from "next/navigation";
 import { UseAppContext } from "./Context";
+import { MdOutlineNewLabel } from "react-icons/md";
 
 export function AddLabelModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -97,12 +95,17 @@ export function AddLabelModal() {
 
   return (
     <>
-      <button
-        className=" flex items-center px-[22px]  text-[26px] text-[white] font-medium  rounded-lg   bg-[#48aae6] w-[fit-content] mr-[5px] font-dhurjati ml-[20px] mb-[10px]"
+      <MdOutlineNewLabel
+        onClick={onOpen}
+        size={40}
+        color="white"
+      ></MdOutlineNewLabel>
+      {/* <button
+        className="   text-[26px] text-[white] font-medium  rounded-lg   bg-[#48aae6]  font-dhurjati"
         onClick={onOpen}
       >
-        <TiPlus /> Add Label
-      </button>
+        <TiPlus />
+      </button> */}
 
       <Modal
         isOpen={isOpen}
