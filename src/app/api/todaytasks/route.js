@@ -13,8 +13,11 @@ export const GET = catchAsyncErrors(async function (NextRequest) {
   if (!userId) {
     return ErrorHandler(401, "Please login first");
   }
-  const currentDate = new Date(); // Get the current date and time
-  currentDate.setHours(0, 0, 0, 0); // Set the time to 00:00:00 to represent the start of the current day
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
   await connectDB();
 
   let user = await User.findById(userId);
@@ -22,26 +25,14 @@ export const GET = catchAsyncErrors(async function (NextRequest) {
   if (!user) {
     return ErrorHandler(400, "Please login first");
   }
-  const totalTasks = await Task.countDocuments({ user: userId });
-  const completedTask = await Task.countDocuments({
-    user: userId,
-    isCompleted: true,
-  });
-  const failedTask = await Task.countDocuments({
-    user: userId,
-    isCompleted: false,
-    taskDate: { $lt: currentDate },
-  });
 
-  user = {
-    ...user.toObject(), // Convert Mongoose user object to plain JavaScript object
-    totalTasks,
-    completedTask,
-    failedTask,
-  };
+  const todayTasks = await Task.find({
+    user: userId,
+    taskDate: { $gte: startOfToday, $lte: endOfToday },
+  });
 
   return NextResponse.json({
     success: true,
-    user,
+    todayTasks,
   });
 });

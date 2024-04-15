@@ -3,7 +3,7 @@ import AddTaskModal from "../ClientSideComponent/AddTaskModal";
 import { FaHome } from "react-icons/fa";
 import DateComp from "../ClientSideComponent/DateComp";
 import LogoutButton from "../ClientSideComponent/LogoutButton";
-import { myTask } from "../../../services/TaskService";
+import { myTask, todayTasks } from "../../../services/TaskService";
 import { cookies } from "next/headers";
 import { TabsDemo } from "../ClientSideComponent/TabsDemo";
 import ShowLabel from "../ClientSideComponent/ShowLabel";
@@ -15,6 +15,7 @@ export default async function page({ searchParams }) {
   const currentPage = searchParams.page || 1;
   const currentTab = searchParams.idx;
   const data = await getMyTask(currentPage, currentTab);
+  const todayTasksData = await getTodayTask();
   return (
     <div className="bg-[mintcream] relative min-h-screen">
       <div className="bg-[#48aae6] h-[5px] fixed top-0 left-0 right-0"></div>
@@ -31,7 +32,7 @@ export default async function page({ searchParams }) {
       <h3 className="flex justify-center text-[45px] font-bold font-dhurjati mb-[15px]">
         <span className="text-[#48aae6]">Today&apos;s</span>&nbsp;Tasks
       </h3>
-      <TodayTaskSlider />
+      <TodayTaskSlider todayTasksData={todayTasksData} />
       {/* <ShowLabel />
       <AddLabelModal /> */}
       <div>
@@ -54,10 +55,14 @@ export default async function page({ searchParams }) {
   );
 }
 
-// Implement the getServerSideProps function
 export async function getMyTask(pageno, currentTab) {
-  // Fetch data from an API or database
   const { value: token } = cookies().get("token") || {};
   const response = await myTask(token, pageno, currentTab);
+  return response;
+}
+
+export async function getTodayTask() {
+  const { value: token } = cookies().get("token") || {};
+  const response = await todayTasks(token);
   return response;
 }

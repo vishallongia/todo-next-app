@@ -85,3 +85,23 @@ export const updateTask = async (payload) => {
     return e;
   }
 };
+
+//Today Tasks
+export const todayTasks = async (token) => {
+  try {
+    const response = await fetch(`https://todo-next-app-swart.vercel.app/api/todaytasks`, {
+      method: "GET",
+      headers: {
+        cookie: `token=${token}`,
+        "Content-Type": "application/json", // Set correct content type for JSON data
+      },
+    });
+    const { status } = response;
+    const data = await response.json();
+    data.status = status;
+
+    return data;
+  } catch (e) {
+    return e;
+  }
+};
