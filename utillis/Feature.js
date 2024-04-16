@@ -82,8 +82,8 @@ export function getUserIdFromHeaders() {
 //Get Host Name
 
 export function getHostNameUrl() {
-  const getHostName = headers().get("host");
-  if (hostName.includes("localhost")) {
+  const getHost = headers().get("host");
+  if (getHost.includes("localhost")) {
     return process.env.LOCAL_URL;
   } else {
     return process.env.PRODUCTION_URL;
