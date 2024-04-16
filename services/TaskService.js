@@ -20,10 +20,10 @@ export const createTask = async (payload) => {
 };
 
 // My Task
-export const myTask = async (token, pageno, currentTab) => {
+export const myTask = async (token, pageno, currentTab, hostName) => {
   try {
     const response = await fetch(
-      `https://todo-next-app-swart.vercel.app/api/mytask?pageno=${pageno}&idx=${currentTab}`,
+      `${hostName}api/mytask?pageno=${pageno}&idx=${currentTab}`,
       {
         method: "GET",
         headers: {
@@ -87,9 +87,9 @@ export const updateTask = async (payload) => {
 };
 
 //Today Tasks
-export const todayTasks = async (token) => {
+export const todayTasks = async (token, hostName) => {
   try {
-    const response = await fetch(`https://todo-next-app-swart.vercel.app/api/todaytasks`, {
+    const response = await fetch(`${hostName}api/todaytasks`, {
       method: "GET",
       headers: {
         cookie: `token=${token}`,

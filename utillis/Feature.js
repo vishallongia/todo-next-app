@@ -79,4 +79,13 @@ export function getUserIdFromHeaders() {
   return undefined;
 }
 
-// UI Response Handler
+//Get Host Name
+
+export function getHostNameUrl() {
+  const hostName = headers().get("host");
+  if (hostName.includes("localhost")) {
+    return process.env.LOCAL_URL;
+  } else {
+    return process.env.PRODUCTION_URL;
+  }
+}

@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import AddTaskModal from "../ClientSideComponent/AddTaskModal";
 import { FaHome } from "react-icons/fa";
 import DateComp from "../ClientSideComponent/DateComp";
 import LogoutButton from "../ClientSideComponent/LogoutButton";
@@ -11,11 +10,13 @@ import AddLabelModal from "../ClientSideComponent/AddLabelModal";
 import ProfileDrawer from "../ClientSideComponent/ProfileDrawer";
 import TodayTaskSlider from "../ClientSideComponent/TodayTaskSlider";
 import TaskOptionDialer from "../ClientSideComponent/TaskOptionDialer";
-export default async function page({ searchParams }) {
+import { getHostNameUrl } from "../../../utillis/Feature";
+export default async function Page({ searchParams }) {
   const currentPage = searchParams.page || 1;
   const currentTab = searchParams.idx;
-  const data = await getMyTask(currentPage, currentTab);
-  const todayTasksData = await getTodayTask();
+  const hostName = getHostNameUrl();
+  const data = await getMyTask(currentPage, currentTab, hostName);
+  const todayTasksData = await getTodayTask(hostName);
   return (
     <div className="bg-[mintcream] relative min-h-screen">
       <div className="bg-[#48aae6] h-[5px] fixed top-0 left-0 right-0"></div>
@@ -55,14 +56,14 @@ export default async function page({ searchParams }) {
   );
 }
 
-export async function getMyTask(pageno, currentTab) {
+export async function getMyTask(pageno, currentTab, hostName) {
   const { value: token } = cookies().get("token") || {};
-  const response = await myTask(token, pageno, currentTab);
+  const response = await myTask(token, pageno, currentTab, hostName);
   return response;
 }
 
-export async function getTodayTask() {
+export async function getTodayTask(hostName) {
   const { value: token } = cookies().get("token") || {};
-  const response = await todayTasks(token);
+  const response = await todayTasks(token, hostName);
   return response;
 }
