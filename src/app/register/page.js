@@ -13,12 +13,20 @@ import { SiNamecheap } from "react-icons/si";
 import { registerUser } from "../../../services/UserService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { UseAppContext } from "../ClientSideComponent/Context";
+import { ImCross } from "react-icons/im";
+import Image from "next/image";
 
 export default function Page() {
   const { setIsAuthenticated } = UseAppContext();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedAvatarUrl, setSelectedAvatarUrl] = useState("");
+  const [activeAvatar, setActiveAvatar] = useState(-1);
   const router = useRouter();
+  const avatarUrls = Array.from(
+    { length: 4 },
+    (_, index) => `/Avatars/Avatar${index + 1}.jpg`
+  );
   const showHidePasswordFn = () => {
     setShowPassword(!showPassword);
   };
@@ -55,6 +63,9 @@ export default function Page() {
     initialValues,
     validate,
     onSubmit: async (values) => {
+      if (selectedAvatarUrl) {
+        values.avatar = selectedAvatarUrl; // adding avatar url
+      }
       setIsLoading(true);
       const response = await registerUser(values);
       const redirection = UIErrorHandler(response, "/home");
@@ -144,6 +155,45 @@ export default function Page() {
                 {formik.errors.password}
               </p>
             ) : null}
+          </div>
+          <div>
+            <p className="mb-[10px] ml-[32px]">Choose avatar you want</p>
+          </div>
+
+          <div className="flex justify-center gap-[20px] mb-[20px]">
+            {avatarUrls.map((url, index) => {
+              return (
+                <div className="relative" key={index}>
+                  <Image
+                    src={url}
+                    alt="aaa"
+                    width={60}
+                    height={60}
+                    className={
+                      index === activeAvatar
+                        ? "rounded-full border-[4px]  border-[black] border-solid"
+                        : "rounded-full"
+                    }
+                    onClick={() => {
+                      setSelectedAvatarUrl(url);
+                      setActiveAvatar(index);
+                    }}
+                  />
+                  <ImCross
+                    className={
+                      index === activeAvatar
+                        ? "absolute right-[-12px] top-0"
+                        : "hidden"
+                    }
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent image click event
+                      setSelectedAvatarUrl(""); // Clear the selected avatar
+                      setActiveAvatar(-1); // Reset activeAvatar state
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
           <button
             type="submit"

@@ -21,5 +21,9 @@ const schema = new mongoose.Schema({
     type: Array,
     default: ["All", "Personal", "Shopping", "Buisness"],
   },
+  avatar: {
+    type: String,
+    default: "/Avatars/default.jpg",
+  },
 });
 export const User = mongoose.models.user ?? mongoose.model("user", schema);

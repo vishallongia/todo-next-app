@@ -21,7 +21,6 @@ export const createTask = async (payload) => {
 
 // My Task
 export const myTask = async (token, pageno, currentTab, hostName) => {
-  console.log(hostName, "hostName");
   try {
     const response = await fetch(
       `${hostName}api/mytask?pageno=${pageno}&idx=${currentTab}`,

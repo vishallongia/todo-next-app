@@ -12,7 +12,7 @@ import ErrorHandler, {
 import bcrypt from "bcrypt";
 
 export const POST = catchAsyncErrors(async function (NextRequest) {
-  const { name, email, password } = await NextRequest.json();
+  const { name, email, password, avatar } = await NextRequest.json();
 
   if (!name) {
     return ErrorHandler(400, "Please provide name of user");
@@ -34,7 +34,7 @@ export const POST = catchAsyncErrors(async function (NextRequest) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  user = await User.create({ name, email, password: hashedPassword });
+  user = await User.create({ name, email, password: hashedPassword, avatar });
   const token = tokenGenrator(user._id);
   await cookieSetter(token, true);
 
