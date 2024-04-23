@@ -60,7 +60,7 @@ export function TabsDemo({ data, totalPages, backendCurrentPage }) {
             </>
           ) : (
             <div className="w-[100%] text-center">
-              <BiTaskX size={190} className="w-[100%]" />
+              <BiTaskX size={150} className="w-[100%]" />
               <p className="text-center text-[snow] text-lg font-medium text-[22px]">
                 No tasks found.
               </p>

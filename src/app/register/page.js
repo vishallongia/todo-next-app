@@ -157,7 +157,9 @@ export default function Page() {
             ) : null}
           </div>
           <div>
-            <p className="mb-[10px] ml-[32px]">Choose avatar you want</p>
+            <p className="text-xl font-semibold mb-4 text-gray-800">
+              Choose an avatar
+            </p>
           </div>
 
           <div className="flex justify-center gap-[20px] mb-[20px]">

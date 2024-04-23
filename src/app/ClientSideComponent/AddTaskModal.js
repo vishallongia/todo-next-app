@@ -56,6 +56,18 @@ export default function AddTaskModal() {
   const validate = (values) => {
     const errors = {};
 
+    // Create a new Date object for taskStartTime
+    const taskStartTime = new Date();
+    const [hours, minutes] = values.taskStartTime.split(":").map(Number);
+    taskStartTime.setHours(hours);
+    taskStartTime.setMinutes(minutes);
+
+    // Create a new Date object for taskEndTime
+    const taskEndTime = new Date();
+    const [hoursEnd, minutesEnd] = values.taskEndTime.split(":").map(Number);
+    taskEndTime.setHours(hoursEnd);
+    taskEndTime.setMinutes(minutesEnd);
+
     if (!values.title) {
       errors.title = "Please enter title";
     }
@@ -65,14 +77,37 @@ export default function AddTaskModal() {
     if (!values.taskStartTime) {
       errors.taskStartTime = "Please enter task start time";
     }
+
+    // Check if taskStartTime is less than current time
+    else if (new Date().getTime() > taskStartTime.getTime()) {
+      errors.taskStartTime = "Task start time cannot be less than current time";
+    }
+
     if (!values.taskEndTime) {
       errors.taskEndTime = "Please enter task end time";
     }
+
+    // Check if taskStartTime is less than current time
+    else if (new Date().getTime() > taskEndTime.getTime()) {
+      errors.taskEndTime = "Task end time cannot be less than current time";
+    } else if (taskEndTime.getTime() <= taskStartTime.getTime()) {
+      errors.taskEndTime =
+        "Task end time cannot be less than or equal to task start time";
+    }
+
     if (!values.tag) {
       errors.tag = "Please select tag";
     }
     if (!values.taskDate) {
       errors.taskDate = "Please enter task date";
+    } else if (values.taskDate < new Date()) {
+      errors.taskDate = "Task date cannot be less than today's date";
+    } else {
+      const taskDate = new Date(values.taskDate).setHours(0, 0, 0, 0);
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      if (taskDate < currentDate) {
+        errors.taskDate = "Task date cannot be less than today's date";
+      }
     }
 
     return errors;
@@ -82,6 +117,7 @@ export default function AddTaskModal() {
     initialValues,
     validate,
     onSubmit: async (values) => {
+      console.log(values);
       const response = await createTask(values);
       const { redirection, success } = UIErrorHandler(response);
       if (redirection && !success) {
@@ -155,7 +191,7 @@ export default function AddTaskModal() {
                 />
               </InputGroup>
               {formik.touched.title && formik.errors.title ? (
-                <p className="flex justify-start w-[80%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
+                <p className="flex justify-start w-[100%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
                   {formik.errors.title}
                 </p>
               ) : null}
@@ -182,7 +218,7 @@ export default function AddTaskModal() {
               </InputGroup>
 
               {formik.touched.description && formik.errors.description ? (
-                <p className="flex justify-start w-[80%]  pt-[5px] text-[#df4a4a] font-medium  mb-[8px]">
+                <p className="flex justify-start w-[100%]  pt-[5px] text-[#df4a4a] font-medium  mb-[8px]">
                   {formik.errors.description}
                 </p>
               ) : null}
@@ -216,7 +252,7 @@ export default function AddTaskModal() {
                 }
               />
               {formik.touched.taskStartTime && formik.errors.taskStartTime ? (
-                <p className="flex justify-start w-[80%]  pt-[5px] text-[#df4a4a] font-medium  mb-[8px]">
+                <p className="flex justify-start w-[100%]  pt-[5px] text-[#df4a4a] font-medium  mb-[8px]">
                   {formik.errors.taskStartTime}
                 </p>
               ) : null}
@@ -250,7 +286,7 @@ export default function AddTaskModal() {
                 }
               />
               {formik.touched.taskEndTime && formik.errors.taskEndTime ? (
-                <p className="flex justify-start w-[80%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
+                <p className="flex justify-start w-[100%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
                   {formik.errors.taskEndTime}
                 </p>
               ) : null}
@@ -282,7 +318,7 @@ export default function AddTaskModal() {
               />
 
               {formik.touched.taskDate && formik.errors.taskDate ? (
-                <p className="flex justify-start w-[80%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
+                <p className="flex justify-start w-[100%]  pt-[5px] text-[#df4a4a] font-medium mb-[8px]">
                   {formik.errors.taskDate}
                 </p>
               ) : null}

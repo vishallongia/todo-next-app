@@ -22,7 +22,7 @@ export default function ProfileDrawer() {
 
   return (
     <>
-      <CgProfile color="white" onClick={onOpen} size={30} />
+      <CgProfile color="white" onClick={onOpen} size={25} />
 
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />

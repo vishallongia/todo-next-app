@@ -48,7 +48,7 @@ export default async function Page({ searchParams }) {
       <div className="bg-[#48aae6] fixed bottom-0 left-0 right-0">
         <div className="flex py-[15px] items-center w-[100%] justify-around">
           <ProfileDrawer />
-          <FaHome size={30} className="text-[snow]" />
+          <FaHome size={25} className="text-[snow]" />
           <LogoutButton />
         </div>
       </div>
