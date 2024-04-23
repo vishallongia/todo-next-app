@@ -12,7 +12,7 @@ export default function TaskOptionDialer() {
 
   const centerContent = (
     <>
-      <div className="flex flex-wrap align-items-center gap-6">
+      <div className="flex flex-wrap align-items-center gap-[40px]">
         <AddTaskModal />
         <AddLabelModal />
       </div>
@@ -23,7 +23,7 @@ export default function TaskOptionDialer() {
     <React.Fragment>
       <div className="flex align-items-center gap-2">
         <Avatar image={user.avatar} shape="circle" className="w-[50px]" />
-        <span className="font-bold text-white">{user.name}</span>
+        <span className="font-bold mt-[5px] text-white">{user.name}</span>
       </div>
     </React.Fragment>
   );
@@ -34,7 +34,7 @@ export default function TaskOptionDialer() {
         start={startContent}
         center={centerContent}
         end={endContent}
-        className="bg-[#0b4f79]"
+        className="bg-[#0b4f79] shadow-md shadow-[black]"
         style={{
           borderRadius: "3rem",
         }}

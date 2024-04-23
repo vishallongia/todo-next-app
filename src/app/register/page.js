@@ -71,7 +71,7 @@ export default function Page() {
       const redirection = UIErrorHandler(response, "/home");
       setIsLoading(false);
       if (redirection) {
-        router.push(redirection);
+        router.push("/login");
       }
     },
   });

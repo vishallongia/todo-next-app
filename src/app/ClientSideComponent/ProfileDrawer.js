@@ -18,29 +18,25 @@ import { Knob } from "primereact/knob";
 
 export default function ProfileDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
   const { user } = UseAppContext();
 
   return (
     <>
       <CgProfile color="white" onClick={onOpen} size={30} />
 
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader className="bg-[lightcyan]">User Profile</DrawerHeader>
           <DrawerBody className="bg-[#48aae6] ">
-            <Avatar
-              image={user.avatar}
-              shape="circle"
-              className="w-[100%] mt-[130px] "
-            />
+            <div className="text-center">
+              <Avatar
+                image={user.avatar}
+                shape="circle"
+                className="w-[60%] mt-[90px]"
+              />
+            </div>
             <span className=" text-[24px] text-white flex justify-center mb-[20px] font-bungee">
               {user.name}
             </span>
@@ -48,7 +44,7 @@ export default function ProfileDrawer() {
             <Knob
               value={user.totalTasks}
               className="flex justify-center"
-              max={user.totalTasks}
+              max={user.totalTasks || 1}
               valueColor="#0b4f79"
               textColor="snow"
               rangeColor="snow"
@@ -60,7 +56,7 @@ export default function ProfileDrawer() {
             <Knob
               value={user.completedTask}
               className="flex justify-center"
-              max={user.totalTasks}
+              max={user.totalTasks || 1}
               valueColor="#0b4f79"
               textColor="snow"
               rangeColor="snow"
@@ -72,7 +68,7 @@ export default function ProfileDrawer() {
             <Knob
               value={user.failedTask}
               className="flex justify-center"
-              max={user.totalTasks}
+              max={user.totalTasks || 1}
               valueColor="#0b4f79"
               textColor="snow"
               rangeColor="snow"
@@ -84,7 +80,7 @@ export default function ProfileDrawer() {
             <Knob
               value={user.totalTasks - user.completedTask - user.failedTask}
               className="flex justify-center bg-snow"
-              max={user.totalTasks}
+              max={user.totalTasks || 1}
               valueColor="#0b4f79"
               textColor="snow"
               rangeColor="snow"

@@ -30,7 +30,7 @@ export default function TodayTaskSlider({ todayTasksData }) {
   ];
 
   useEffect(() => {
-    if (todayTasksData.todayTasks.length > 0) {
+    if (todayTasksData.todayTasks && todayTasksData.todayTasks.length > 0) {
       const updatedTodayTasks = todayTasksData.todayTasks.map((task) => ({
         _id: task._id,
         title: task.title,
@@ -51,7 +51,10 @@ export default function TodayTaskSlider({ todayTasksData }) {
   const productTemplate = (task) => {
     return (
       <div>
-        <Card title={task.title} className="bg-[#0b4f79] text-[snow]">
+        <Card
+          title={task.title}
+          className="bg-[#0b4f79] text-[snow] shadow-md shadow-[black]"
+        >
           <p className="m-0">{task.description}</p>
         </Card>
       </div>

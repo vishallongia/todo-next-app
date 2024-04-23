@@ -13,6 +13,7 @@ import { deleteTask } from "../../../services/TaskService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import { UseAppContext } from "./Context";
 
 export default function DeleteTaskModal({
   showDeletePopup,
@@ -22,6 +23,7 @@ export default function DeleteTaskModal({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const router = useRouter();
+  const { user, setUser } = UseAppContext();
 
   const deleteTaskFn = async () => {
     const payload = { deleteTaskId: [id] };
@@ -32,8 +34,14 @@ export default function DeleteTaskModal({
     }
     if (success) {
       setShowDeletePopup(false);
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        totalTasks: prevUser.totalTasks - 1,
+      })); // Update totalTasks in user state
       router.refresh();
     }
+    router.refresh();
   };
 
   return (

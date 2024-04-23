@@ -17,8 +17,6 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import InfoLabel from "../ClientSideComponent/InfoLabel";
-
-import { TiPlus } from "react-icons/ti";
 import { FaPlus } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import { addNewLabel } from "../../../services/UserService";
@@ -26,6 +24,7 @@ import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { useRouter } from "next/navigation";
 import { UseAppContext } from "./Context";
 import { MdOutlineNewLabel } from "react-icons/md";
+import { Badge } from "primereact/badge";
 
 export function AddLabelModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -95,17 +94,17 @@ export function AddLabelModal() {
 
   return (
     <>
-      <MdOutlineNewLabel
-        onClick={onOpen}
-        size={40}
-        color="white"
-      ></MdOutlineNewLabel>
-      {/* <button
-        className="   text-[26px] text-[white] font-medium  rounded-lg   bg-[#48aae6]  font-dhurjati"
-        onClick={onOpen}
-      >
-        <TiPlus />
-      </button> */}
+      <div className="relative">
+        <MdOutlineNewLabel
+          onClick={onOpen}
+          size={40}
+          color="white"
+        ></MdOutlineNewLabel>
+        <Badge
+          value="Add&nbsp;Label"
+          className="absolute left-[-20px] top-[-25px]"
+        ></Badge>
+      </div>
 
       <Modal
         isOpen={isOpen}

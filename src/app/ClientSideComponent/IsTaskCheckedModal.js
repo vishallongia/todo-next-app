@@ -13,6 +13,7 @@ import { updateTask } from "../../../services/TaskService";
 import { UIErrorHandler } from "../../../utillis/UIErrorHandler";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import { UseAppContext } from "./Context";
 
 export default function IsTaskCheckedModal({
   setShowIsTaskCheckedPopup,
@@ -21,6 +22,7 @@ export default function IsTaskCheckedModal({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const { user, setUser } = UseAppContext();
 
   const handleUpdateTaskFn = async () => {
     const response = await updateTask({ taskId: id });
@@ -30,6 +32,10 @@ export default function IsTaskCheckedModal({
     }
     if (success) {
       setShowIsTaskCheckedPopup(false);
+      setUser((prevUser) => ({
+        ...prevUser,
+        completedTask: prevUser.completedTask + 1,
+      })); // Update totalTasks in user state
       router.refresh();
     }
   };
