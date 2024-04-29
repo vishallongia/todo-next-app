@@ -17,6 +17,7 @@ export const config = {
     "/api/updatetask",
     "/api/addlabel",
     "/api/todaytasks",
+    "/api/taskdetailsbyid/:id*",
   ],
 };
 export async function middleware(NextRequest) {

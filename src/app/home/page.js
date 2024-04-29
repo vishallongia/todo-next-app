@@ -1,16 +1,18 @@
 import React, { Suspense } from "react";
 import { FaHome } from "react-icons/fa";
-import DateComp from "../ClientSideComponent/DateComp";
+// import DateComp from "../ClientSideComponent/DateComp";
 import LogoutButton from "../ClientSideComponent/LogoutButton";
 import { myTask, todayTasks } from "../../../services/TaskService";
 import { cookies } from "next/headers";
 import { TabsDemo } from "../ClientSideComponent/TabsDemo";
-import ShowLabel from "../ClientSideComponent/ShowLabel";
-import AddLabelModal from "../ClientSideComponent/AddLabelModal";
+// import ShowLabel from "../ClientSideComponent/ShowLabel";
+// import AddLabelModal from "../ClientSideComponent/AddLabelModal";
 import ProfileDrawer from "../ClientSideComponent/ProfileDrawer";
 import TodayTaskSlider from "../ClientSideComponent/TodayTaskSlider";
 import TaskOptionDialer from "../ClientSideComponent/TaskOptionDialer";
 import { getHostNameUrl } from "../../../utillis/Feature";
+import FilterData from "../ClientSideComponent/FilterData";
+
 export default async function Page({ searchParams }) {
   const currentPage = searchParams.page || 1;
   const currentTab = searchParams.idx;
@@ -25,7 +27,6 @@ export default async function Page({ searchParams }) {
         <span className="text-[#48aae6]">my</span>Todo
       </h3>
       <TaskOptionDialer className="sticky top-[12px]" />
-      {/* <AddTaskModal /> */}
       {/* <div className="flex justify-center">
         <DateComp></DateComp>
       </div> */}
@@ -36,6 +37,7 @@ export default async function Page({ searchParams }) {
       <TodayTaskSlider todayTasksData={todayTasksData} />
       {/* <ShowLabel />
       <AddLabelModal /> */}
+
       <div>
         {data && (
           <TabsDemo
@@ -49,6 +51,7 @@ export default async function Page({ searchParams }) {
         <div className="flex py-[15px] items-center w-[100%] justify-around">
           <ProfileDrawer />
           <FaHome size={25} className="text-[snow]" />
+          <FilterData />
           <LogoutButton />
         </div>
       </div>

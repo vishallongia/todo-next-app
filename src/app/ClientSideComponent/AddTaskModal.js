@@ -56,6 +56,9 @@ export default function AddTaskModal() {
   const validate = (values) => {
     const errors = {};
 
+    const taskDate = new Date(values.taskDate).setHours(0, 0, 0, 0);
+    const currentDate = new Date().setHours(0, 0, 0, 0);
+
     // Create a new Date object for taskStartTime
     const taskStartTime = new Date();
     const [hours, minutes] = values.taskStartTime.split(":").map(Number);
@@ -103,8 +106,6 @@ export default function AddTaskModal() {
     } else if (values.taskDate < new Date()) {
       errors.taskDate = "Task date cannot be less than today's date";
     } else {
-      const taskDate = new Date(values.taskDate).setHours(0, 0, 0, 0);
-      const currentDate = new Date().setHours(0, 0, 0, 0);
       if (taskDate < currentDate) {
         errors.taskDate = "Task date cannot be less than today's date";
       }
@@ -117,7 +118,6 @@ export default function AddTaskModal() {
     initialValues,
     validate,
     onSubmit: async (values) => {
-      console.log(values);
       const response = await createTask(values);
       const { redirection, success } = UIErrorHandler(response);
       if (redirection && !success) {

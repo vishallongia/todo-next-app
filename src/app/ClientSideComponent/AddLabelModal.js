@@ -38,7 +38,7 @@ export function AddLabelModal() {
   const handleLabelTextFn = () => {
     if (labelText === "") {
       setShowError(true);
-    } else if (user.label.includes(labelText)) {
+    } else if (user.label.includes(labelText.trim())) {
       setIsLabelExist(true);
     } else if (
       user.label.some(
@@ -46,7 +46,7 @@ export function AddLabelModal() {
       )
     ) {
       setIsLabelExist(true);
-    } else if (addedLabel.includes(labelText)) {
+    } else if (addedLabel.includes(labelText.trim())) {
       setIsLabelExist(true);
     } else if (
       addedLabel.some(

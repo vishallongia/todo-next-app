@@ -10,7 +10,7 @@ export default function CheckBox({ id }) {
 
   return (
     <>
-      <div className="checkbox-wrapper-19 relative top-[3px]">
+      <div className="checkbox-wrapper-19 relative top-[4px]">
         <input
           id={id}
           type="checkbox"

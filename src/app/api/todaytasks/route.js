@@ -6,10 +6,10 @@ import { connectDB } from "../../../../utillis/Feature";
 import ErrorHandler, {
   catchAsyncErrors,
 } from "../../../../utillis/ErrorHandler";
+import { getUserIdFromHeaders } from "../../../../utillis/Feature";
 
 export const GET = catchAsyncErrors(async function (NextRequest) {
-  let userId =
-    headers().get("set-cookie").split("=")[1].split(";")[0] || undefined;
+  let userId = getUserIdFromHeaders();
   if (!userId) {
     return ErrorHandler(401, "Please login first");
   }

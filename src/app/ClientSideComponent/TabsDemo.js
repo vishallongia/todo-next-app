@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Tabs } from "./Tabs";
 import CheckBox from "./CheckBox";
 import DeleteButton from "./DeleteButton";
@@ -10,6 +9,7 @@ import { Badge } from "@chakra-ui/react";
 import { MdDone } from "react-icons/md";
 import PageNavigator from "./Pagination";
 import { useSearchParams } from "next/navigation";
+import ViewTask from "./ViewTask";
 
 export function TabsDemo({ data, totalPages, backendCurrentPage }) {
   const [key, setKey] = useState(0);
@@ -34,11 +34,15 @@ export function TabsDemo({ data, totalPages, backendCurrentPage }) {
                   className="flex items-center bg-[#0b4f79] text-white text-[16px] font-mono rounded-lg mx-[10px] py-[15px] font-medium mb-[20px]"
                 >
                   <FaCalendarAlt size={40} className="basis-[30%]" />
-                  <div className="flex items-center justify-around basis-[60%]">
-                    <div className="basis-[70%]">
-                      <p>{task.title}</p>
+                  <div className="flex items-center justify-around basis-[70%]">
+                    <div className="basis-[40%]">
+                      <p>
+                        {task.title.length > 25
+                          ? task.title.substring(0, 25) + " ..."
+                          : task.title}
+                      </p>
                     </div>
-                    <div className="basis-[40%] flex justify-end gap-[10px] items-center">
+                    <div className="basis-[30%] flex justify-end gap-[10px] items-center">
                       {task.isCompleted ? (
                         <Badge className="py-[5px]">
                           <MdDone size={15} />
@@ -47,6 +51,7 @@ export function TabsDemo({ data, totalPages, backendCurrentPage }) {
                         <CheckBox id={task._id} />
                       )}
                       <DeleteButton id={task._id} />
+                      <ViewTask taskDetails={task} />
                     </div>
                   </div>
                 </div>

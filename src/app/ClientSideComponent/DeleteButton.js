@@ -17,7 +17,7 @@ export default function DeleteButton({ id }) {
         }}
       >
         {" "}
-        <MdDelete size={32} />
+        <MdDelete size={30} />
       </button>
       {showDeletePopup && (
         <DeleteTaskModal

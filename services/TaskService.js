@@ -105,3 +105,23 @@ export const todayTasks = async (token, hostName) => {
     return e;
   }
 };
+
+//Today Tasks
+export const getTaskById = async (taskId) => {
+  try {
+    const response = await fetch(`/api/taskdetailsbyid/${taskId}`, {
+      method: "GET",
+      headers: {
+        // cookie: `token=${token}`,
+        "Content-Type": "application/json", // Set correct content type for JSON data
+      },
+    });
+    const { status } = response;
+    const data = await response.json();
+    data.status = status;
+
+    return data;
+  } catch (e) {
+    return e;
+  }
+};
